@@ -16,13 +16,13 @@ const links = [
     class="flex items-center justify-between py-6 mx-auto max-w-5xl px-5 md:px-6 lg:px-8"
   >
     <h1 class="text-lg md:text-xl lg:text-2xl font-bold">
-      <a href="/">BlogAstro</a>
+      <a href="/">TechBlog</a>
     </h1>
 
     <ul class="flex items-center gap-5">
       {
         links.map((item) => (
-          <li class="capitalize font-medium text-zinc-200 hover:text-zinc-50 text-sm md:text-base">
+          <li class="lowercase font-medium text-zinc-200 hover:text-zinc-50 text-sm md:text-base">
             <a href={item.href}>{item.link}</a>
           </li>
         ))

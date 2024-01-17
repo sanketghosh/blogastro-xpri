@@ -8,18 +8,25 @@ import MainHead from "./main-head.astro";
 /* components */
 import Navbar from "../components/navbar.astro";
 
+/* constants */
+import { SITE_META_DATA } from "../constants";
+
 interface MainLayoutProps {
   title?: string;
   description?: string;
+  isNavbar?: boolean;
 }
 
-const { title, description } = Astro.props as MainLayoutProps;
+const { title, description, isNavbar } = Astro.props as MainLayoutProps;
 ---
 
 <html lang="en">
-  <MainHead title={title} description={description} />
-  <body class="font-bricolage bg-zinc-900 text-zinc-50">
-    <Navbar />
+  <MainHead
+    title={`${SITE_META_DATA.title} | ${title}`}
+    description={`${description} | ${SITE_META_DATA.description}`}
+  />
+  <body class="bg-zinc-900 text-zinc-50">
+    {isNavbar && <Navbar />}
     <main
       class="flex items-center justify-between py-6 mx-auto max-w-5xl px-5 md:px-6 lg:px-8"
     >
