@@ -1,5 +1,7 @@
 ---
 import MainLayout from "../../layouts/main-layout.astro";
+import BlogCard from "../../components/blog-card.astro";
+
 import { formatDate } from "../../utils/date-format";
 
 import { getCollection, getEntry } from "astro:content";
@@ -17,35 +19,16 @@ const allBlogArticles: CollectionEntry<"blog">[] = (
   <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {
       allBlogArticles.map((blog) => (
-        <div class="bg-white rounded-lg overflow-hidden p-3 space-y-3 shadow-md shadow-zinc-300 border-2 border-zinc-200">
-          <div>
-            <a href={"/articles/" + blog.slug}>
-              <img
-                src={`/images/` + blog.data.image}
-                alt={blog.data.title}
-                class="rounded-md hover:brightness-50 transition-all cursor-pointer"
-              />
-            </a>
-          </div>
-          <h2 class="text-lg font-medium leading-tight tracking-tight cursor-pointer">
-            <a href={"/articles/" + blog.slug} class="">
-              {blog.data.title}
-            </a>
-          </h2>
-          <div class="flex items-center justify-between">
-            <p class="text-sm text-zinc-600 font-medium">{blog.data.author}</p>
-            <p class="text-sm text-zinc-600 font-medium">
-              {formatDate(blog.data.pubDate)}
-            </p>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            {blog.data.tags.map((tag) => (
-              <span class="text-sm px-2 py-0.5 bg-zinc-100 text-black rounded-xl font-medium cursor-pointer hover:bg-zinc-200 transition-colors">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </div>
+        <>
+          <BlogCard
+            title={blog.data.title}
+            image={blog.data.image}
+            author={blog.data.author}
+            date={blog.data.pubDate}
+            tags={blog.data.tags}
+            slug={blog.slug}
+          />
+        </>
       ))
     }
   </section>

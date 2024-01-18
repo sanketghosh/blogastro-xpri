@@ -1,0 +1,48 @@
+---
+import { formatDate } from "../utils/date-format";
+
+interface BlogCard {
+  slug?: string;
+  image?: string;
+  title?: string;
+  date: Date;
+  author?: string;
+  tags: string[];
+}
+
+const { slug, image, title, date, tags, author } = Astro.props as BlogCard;
+---
+
+<div
+  class="bg-white rounded-lg overflow-hidden p-3 space-y-3 shadow-md shadow-zinc-300 border-2 border-zinc-200"
+>
+  <div>
+    <a href={"/articles/" + slug}>
+      <img
+        src={`/images/` + image}
+        alt={title}
+        class="rounded-md hover:brightness-50 transition-all cursor-pointer"
+      />
+    </a>
+  </div>
+  <h2 class="text-lg font-medium leading-tight tracking-tight cursor-pointer">
+    <a href={"/articles/" + slug} class="">
+      {title}
+    </a>
+  </h2>
+  <div class="flex items-center justify-between select-none">
+    <p class="text-sm text-zinc-600 font-medium">{author}</p>
+    <p class="text-sm text-zinc-600 font-medium">
+      {formatDate(date)}
+    </p>
+  </div>
+  <div class="flex flex-wrap gap-3">
+    {
+      tags.map((tag) => (
+        <span class="text-sm px-2 py-0.5 bg-zinc-100 text-black rounded-xl font-medium cursor-pointer hover:bg-zinc-200 transition-colors">
+          #{tag}
+        </span>
+      ))
+    }
+  </div>
+</div>
