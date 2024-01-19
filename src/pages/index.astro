@@ -1,16 +1,56 @@
 ---
 import SearchBar from "../components/search-bar.astro";
 import MainLayout from "../layouts/main-layout.astro";
+import BlogCard from "../components/blog-card.astro";
+
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const allBlogArticles: CollectionEntry<"blog">[] = (
+  await getCollection("blog")
+).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <MainLayout title="Home" description="Welcome to TechBlog" isNavbar={true}>
   <!-- <h1>This is the home page for astro blog</h1> -->
-  <div class="space-y-5">
+  <div class="space-y-7">
+    <!-- heading -->
     <h1
-      class="text-2xl md:text-5xl lg:text-7xl xl:text-8xl leading-tight tracking-tighter text-zinc-800 font-semibold"
+      class="text-3xl md:text-5xl lg:text-7xl xl:text-8xl leading-tight tracking-tighter text-zinc-800 font-medium select-none"
     >
-      Article, stories, tutorials for tech people by tech people.
+      Article, stories, tutorials for <span class="text-gray-500"
+        >tech people</span
+      >
+      by tech people.
     </h1>
-    <SearchBar />
+
+    <!-- search form -->
+    <div>
+      <SearchBar />
+    </div>
+
+    <!-- featured blog   -->
+
+    <div>
+      <h1 class="mb-3 md:text-lg xl:text-xl font-semibold">
+        Check out our recent posts.
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          allBlogArticles.map((blog) => (
+            <BlogCard
+              title={blog.data.title}
+              image={blog.data.image}
+              author={blog.data.author}
+              date={blog.data.pubDate}
+              tags={blog.data.tags}
+              slug={blog.slug}
+            />
+          ))
+        }
+      </div>
+    </div>
   </div>
 </MainLayout>
