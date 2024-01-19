@@ -36,10 +36,10 @@ const { slug, image, title, date, tags, author } = Astro.props as BlogCard;
       {formatDate(date)}
     </p>
   </div>
-  <div class="flex flex-wrap gap-3">
+  <div class="flex flex-wrap gap-2">
     {
       tags.map((tag) => (
-        <span class="text-sm px-2 py-0.5 bg-zinc-100 text-black rounded-xl font-medium cursor-pointer hover:bg-zinc-200 transition-colors">
+        <span class="text-sm px-3 py-0.5 bg-zinc-200 text-black rounded-xl font-medium cursor-pointer hover:bg-zinc-100 transition-colors">
           #{tag}
         </span>
       ))
