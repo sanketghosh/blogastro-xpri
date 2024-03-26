@@ -1,0 +1,35 @@
+---
+import MainLayout from "../../layouts/main-layout.astro";
+import BlogCard from "../../components/blog-card.astro";
+
+import { formatDate } from "../../utils/date-format";
+
+import { getCollection, getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const allBlogArticles: CollectionEntry<"blog">[] = (
+  await getCollection("blog")
+).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<MainLayout title="Articles" description="Articles page" isNavbar={true}>
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      allBlogArticles.map((blog) => (
+        <>
+          <BlogCard
+            title={blog.data.title}
+            image={blog.data.image}
+            author={blog.data.author}
+            date={blog.data.pubDate}
+            tags={blog.data.tags}
+            slug={blog.slug}
+          />
+        </>
+      ))
+    }
+  </section>
+</MainLayout>

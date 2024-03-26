@@ -1,0 +1,36 @@
+---
+const links = [
+  {
+    link: "home",
+    href: "/",
+  },
+  {
+    link: "about",
+    href: "/about/",
+  },
+  {
+    link: "articles",
+    href: "/articles/",
+  },
+];
+---
+
+<nav class="w-full bg-white text-black sticky top-0 z-50 backdrop-blur-md backdrop-filter bg-opacity-60">
+  <div
+    class="flex items-center justify-between py-6 mx-auto max-w-6xl px-5 md:px-6 lg:px-8"
+  >
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold">
+      <a href="/">TechBlog</a>
+    </h1>
+
+    <ul class="flex items-center gap-5">
+      {
+        links.map((item) => (
+          <li class="lowercase font-medium text-zinc-700 hover:text-black text-sm md:text-[15px]">
+            <a href={item.href}>{item.link}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

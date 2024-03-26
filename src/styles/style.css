@@ -1,0 +1,12 @@
+@font-face {
+  font-family: bricolage;
+  src: url(/bricolage.ttf);
+}
+
+body {
+  font-family: bricolage;
+}
+
+::-webkit-scrollbar {
+  @apply w-0;
+}
